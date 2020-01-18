@@ -1,0 +1,239 @@
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+
+$greenLink: #1fd0b6;
+$bloomin-dark-green-color: #47b8b3;
+
+$text-color: #333333;
+$text-muted-color: #b0b0b0;
+$wizard-bg-color: white;
+$text-muted-step-color: #9b9b9b;
+$bg-muted-step-color: #e6e6e6;
+$text-completed-step-color: white;
+$bg-completed-step-color: $greenLink;
+$step-number-border-thickness: 10px;
+$step-number-dimension: 2em;
+$step-transition: 0.25s ease-in-out;
+$wizard-line-height: 2px;
+$line-vertical-offset: -1px;
+
+* {
+  font-family: ProximaNova, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7vh;
+  border-bottom: 1px solid #e5e5e5;
+
+  .header-container {
+    width: 73%;
+  }
+}
+
+.links-container {
+  width: 16%;
+  display: flex;
+  color: #62646a;
+  font-weight: 600;
+
+  .item-link {
+    white-space:nowrap;
+    cursor: pointer;
+    margin-right: 16%;
+  }
+  .item-link:hover {
+    color: #1fd0b6;
+  }
+
+  .selected {
+    color: #1fd0b6;
+  }
+  .selected:hover {
+    color: lighten($greenLink, 20%);
+  }
+}
+
+.chessgame-title {
+  font-weight: bold;
+  font-size: 26px
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+
+  .wizard {
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+    margin-top: 4%;
+    width: 37%;
+    height: 69%;
+    background-color: white;
+  }
+}
+
+.steps ul li {
+  width: 20.16%;
+  margin-right: 10px;
+  background: #f3d4b7;
+  transition: all 0.5s ease;
+}
+
+// steps
+.wizard-steps {
+  height: 100%;
+  padding: 10px;
+  background-color: $wizard-bg-color;
+
+  .steps-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .step-number {
+        font-size: 1.5em;
+        color: $text-muted-step-color;
+        background-color: $bg-muted-step-color;
+        border: $step-number-border-thickness solid $wizard-bg-color;
+
+        width: $step-number-dimension;
+        height: $step-number-dimension;
+        line-height: $step-number-dimension;
+        text-align: center;
+        border-radius: 50%;
+
+        z-index: 15;
+
+        transition: $step-transition;
+      }
+
+      .step-name {
+        color: $text-muted-color;
+
+        transition: $step-transition;
+      }
+
+      &.completed {
+        .step-number {
+          color: $text-completed-step-color;
+          background-color: $bg-completed-step-color;
+        }
+
+        .step-name {
+          color: $text-color;
+        }
+      }
+    }
+  }
+
+  .line {
+    width: 100%;
+    height: $wizard-line-height;
+    background-color: $bg-muted-step-color;
+    position: relative;
+    top: calc(
+      -1em - #{$step-number-border-thickness} - #{$step-number-dimension} + #{$wizard-line-height} + #{$line-vertical-offset}
+    );
+    z-index: 5;
+  }
+}
+
+.wizard-steps {
+  // Hide line before first step
+  .step:first-of-type {
+    .step-name:after {
+      content: "";
+      height: $wizard-line-height;
+      width: calc(100% / 2);
+      display: block;
+      position: relative;
+      top: calc(
+        -1em - #{$step-number-border-thickness} - #{$step-number-dimension} +
+        (
+        #{$wizard-line-height} * 2
+        ) + #{$line-vertical-offset}
+      );
+      background-color: $wizard-bg-color;
+      z-index: 10;
+    }
+  }
+
+  // Hide line after last step
+  .step:last-of-type {
+    .step-name:after {
+      content: "";
+      height: $wizard-line-height;
+      width: calc(100% / 2);
+      display: block;
+      position: relative;
+      top: calc(
+        -1em - #{$step-number-border-thickness} - #{$step-number-dimension} +
+        (
+        #{$wizard-line-height} * 2
+        ) + #{$line-vertical-offset}
+      );
+      left: 50%;
+      background-color: $wizard-bg-color;
+      z-index: 10;
+    }
+  }
+}
+
+.instructions-first-step {
+  font-size: 20px;
+  font-weight: bold;
+}
+

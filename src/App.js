@@ -1,24 +1,39 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div class="header">
+        <div class="header-container">
+          <div class="chessgame-title">
+            <span>Chess Game</span>
+          </div>
+        </div>
+        <div class="links-container">
+          <div class="item-link selected">Instructions</div>
+          <div class="item-link">The Game</div>
+        </div>
+        <div class="separator-line"></div>
+      </div>
+      <div class="content">
+        <div class="wizard">
+          <div class="wizard-steps">
+            <div class="steps-wrapper">
+              <div class="step completed">
+                <span class="step-number">1</span>
+                <span class="step-name">Instructions</span>
+              </div>
+              <div class="step">
+                <span class="step-number">2</span>
+                <span class="step-name">Start the Game</span>
+              </div>
+            </div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
