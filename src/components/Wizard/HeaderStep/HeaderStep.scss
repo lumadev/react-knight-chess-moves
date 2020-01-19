@@ -1,0 +1,16 @@
+@import '../../../variables.scss';
+
+.instructions-first-step {
+  color: #393b3c;
+  margin-top: 5%;
+  font-size: 20px;
+  font-weight: bold;
+  justify-content: center;
+  text-align: center;
+}
+
+.green-container {
+  margin-top: 4%;
+  height: 4vh;
+  background-color: lighten($greenContrastColor, 10%);
+}
