@@ -9,7 +9,7 @@ class Step3 extends React.Component {
       <div>
         <HeaderStep />
         <div className="ready-container">
-          <span class="ready-text">Ready?</span>
+          <span className="ready-text">Ready?</span>
           <Link to="/game" class="button-start">Start The Game</Link>
         </div>
       </div>
