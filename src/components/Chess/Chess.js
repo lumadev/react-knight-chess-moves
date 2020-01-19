@@ -1,9 +1,12 @@
 import React from 'react';
 import Header from '../Header/Header'
 import Alert from '../../shared/Alert/Alert'
+import CheckboxSquare from '../../shared/CheckboxSquare/CheckboxSquare'
+import ButtonBack from '../Wizard/ButtonBack/ButtonBack'
 import ReactHtmlParser from 'react-html-parser';
 import { BallBeat } from 'react-pure-loaders';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 import './Chess.scss'
 
 import * as errorMessages from '../../error.consts';
@@ -15,6 +18,7 @@ class Chess extends React.Component {
     this.state = {
       selectedCell: '',
       loading: false,
+      showSecondTurnMoves: true,
       allowedMoves: [],
       errorGeneric: false
     };
@@ -73,21 +77,31 @@ class Chess extends React.Component {
   }
 
   render() {
+    const { errorGeneric, showSecondTurnMoves } = this.state;
     const knightSymbol = '&#9816;';
+    
     return (
       <div>
         <Header />
         <div className="content">
           <div className="chessboard-container">
-            {this.state.errorGeneric === true ?
+            {errorGeneric === true ?
               <Alert type="error" message={errorMessages.GENERIC_ERROR} /> : ''
             }
             <div className="chess-title-container">
+              <Link to="/home" className="item-link selected">
+                <ButtonBack />
+              </Link>
+              
+              <span></span>
               <span className="chess-title">Chessboard</span>
               {this.state.loading ?
                 <BallBeat color={'#123abc'} loading={true}/> : ''
               }
-              
+              <div className="checkbox-container">
+                <span className="span-second-move">Show Second Move</span>
+                <CheckboxSquare />
+              </div>
             </div>
             <div className="chessboard">
               {/* line 8 */}

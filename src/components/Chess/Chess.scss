@@ -5,22 +5,40 @@
 }
 
 .chess-title-container {
+  margin-bottom: 4%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+
+  .arrow-back {
+    margin-left: 2%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+  }
 
   .chess-title {
-    margin: 0 4% 4% 0;
+    margin: 0 0 2% 0;
     text-align: center;
     font-weight: bold;
     font-size: 24px;
   }
 }
 
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+  width: 30%;
+
+  .span-second-move {
+    margin-right: 5%;
+  }
+}
 
 .chessboard {
   width: 640px;
   height: 640px;
-  margin: 20px;
 }
 
 .black {
