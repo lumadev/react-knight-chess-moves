@@ -1,14 +1,13 @@
 import React from 'react';
-import Header from './components/Header/Header'
-import Wizard from './components/Wizard/Wizard'
+
+import Routes from "./routes";
 import './App.scss';
 
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Wizard />
+      <Routes />
     </div>
   );
 }

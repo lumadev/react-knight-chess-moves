@@ -9,6 +9,7 @@
   white-space: nowrap;
 
   .ready-text {
+    font-size: 20px;
     margin-right: 4%;
   }
 
@@ -20,7 +21,7 @@
     border: 1px solid $greenContrastColor;
     border-radius: 5px;
     color: $greenContrastColor;
-    width: 8vw;
+    width: 6vw;
   }
 
   .button-start:hover {

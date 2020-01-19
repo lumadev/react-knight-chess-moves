@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.scss'
 
 class Header extends React.Component {
@@ -11,8 +12,8 @@ class Header extends React.Component {
           </div>
         </div>
         <div className="links-container">
-          <div className="item-link selected">Instructions</div>
-          <div className="item-link">The Game</div>
+          <Link to="/home" className="item-link selected">Instructions</Link>
+          <Link to="/game" className="item-link">The Game</Link>
         </div>
         <div className="separator-line"></div>
       </div>

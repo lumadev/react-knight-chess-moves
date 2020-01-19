@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../Header/Header'
 
 class Chess extends React.Component {
   constructor() {
@@ -10,9 +11,11 @@ class Chess extends React.Component {
 
   render() {
     return (
-      <div className="content">
-        <div className="wizard shadow">
-          assdasda
+      <div>
+        <Header />
+        <div className="content">
+          <div className="wizard shadow">
+          </div>
         </div>
       </div>
     );
