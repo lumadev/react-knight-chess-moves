@@ -1,0 +1,31 @@
+@import '../../../variables.scss';
+
+.ready-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  width: 100%;
+  white-space: nowrap;
+
+  .ready-text {
+    font-size: 20px;
+    margin-right: 4%;
+  }
+
+  .button-start {
+    padding: 2%;
+    font: inherit;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid $greenContrastColor;
+    border-radius: 5px;
+    color: $greenContrastColor;
+    width: 6vw;
+  }
+
+  .button-start:hover {
+    background-color: $greenContrastColor;
+    color: white;
+  }
+}
