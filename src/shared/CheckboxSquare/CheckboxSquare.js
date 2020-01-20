@@ -8,7 +8,9 @@ class CheckboxSquare extends React.Component {
         <label className="checkbox-button">
           <input
               type="checkbox"
-              className="checkbox-button__input" />
+              className="checkbox-button__input" 
+              onChange={this.props.onChange}
+              checked={this.props.checked}/>
           <span className="checkbox-button__control"></span>
         </label>
       </div>

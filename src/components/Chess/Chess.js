@@ -20,53 +20,70 @@ class Chess extends React.Component {
       loading: false,
       showSecondTurnMoves: true,
       allowedMoves: [],
+      secondMoves: [],
+      secondMovesApi: [],
       errorGeneric: false
     };
     this.cells = [];
   }
 
   handleSelection(x, y) {
-    const cellName = x + String(y);
+    const coordinate = x + String(y);
     if (this.isCellSelected(x, y)) {
       this.clearSelections(x, y);
       return;
     }
 
-    this.setState({ selectedCell: cellName });
+    this.setState({ selectedCell: coordinate });
     
-    Axios.post(`http://localhost:3001/possible-moves`, { cellName }).then((res) => {
-      this.setState({ allowedMoves: res.data.algebricMoves });
+    Axios.post(`http://localhost:3001/move/possible-moves`, { coordinate }).then((res) => {
+      const moves = res.data.moves;
+      this.setState({ allowedMoves: moves });
+      return moves;
+
+    }).then((moves) => {
+      this.selectSecondTurnMoves(moves);
     }).catch(error => {
       this.setState({ errorGeneric: true });
     });
-
-    // const ref = this.cells[cellName];
-
-    // this.cells.forEach((cellRef) => {
-      
-    // });
   }
 
-  // fillPossibleMoves(possibleMoves) {
-  //   possibleMoves.forEach(element => {
-  //     // const ref = this.cells[element];
-  //   });
-  // }
+  selectSecondTurnMoves(moves) {
+    Axios.post(`http://localhost:3001/move/second-turn-moves`, { moves }).then((res) => {
+      const moves = res.data.moves;
+      this.setState({ 
+        secondMoves: moves,
+        secondMovesApi: moves
+      });
+
+    }).catch(error => {
+      this.setState({ errorGeneric: true });
+    });
+  }
 
   clearSelections(x, y) {
     this.setState({ 
       selectedCell: null,
-      allowedMoves: []
+      allowedMoves: [],
+      secondMoves: []
     });
   }
 
   getCellClassName(x, y, color) {
     const cellName = x + String(y);
-    const highlightedClass = `${color} highlighted`;
+    const highlightedYellow = `${color} highlighted`;
+    const highlightedBlue = `${color} highlighted-blue`;
     const isSelected = this.state.selectedCell === cellName;
     const isPossibleMove = this.state.allowedMoves.includes(cellName);
+    const isSecondMove = this.state.secondMoves.includes(cellName);
 
-    return (isSelected || isPossibleMove) ? highlightedClass : color;
+    if (isSelected || isPossibleMove) {
+      return highlightedYellow;
+    }
+    if (isSecondMove && this.state.showSecondTurnMoves) {
+      return highlightedBlue;
+    }
+    return color;
   }
 
   isCellSelected(x, y) {
@@ -76,8 +93,21 @@ class Chess extends React.Component {
     return isSelected;
   }
 
+  toggleShowSecondMove() {
+    const showState = this.state.showSecondTurnMoves;
+    const hide = showState === true;
+
+    this.setState({ showSecondTurnMoves: !showState });
+
+    if (hide) {
+      this.setState({ secondMoves: [] });
+    } else {
+      this.setState({ secondMoves: this.state.secondMovesApi });
+    }
+  }
+
   render() {
-    const { errorGeneric, showSecondTurnMoves } = this.state;
+    const { errorGeneric } = this.state;
     const knightSymbol = '&#9816;';
     
     return (
@@ -99,8 +129,12 @@ class Chess extends React.Component {
                 <BallBeat color={'#123abc'} loading={true}/> : ''
               }
               <div className="checkbox-container">
-                <span className="span-second-move">Show Second Move</span>
-                <CheckboxSquare />
+                <span className="span-second-move">
+                  Show Second Moves
+                </span>
+                <CheckboxSquare 
+                  onChange={this.toggleShowSecondMove.bind(this)} 
+                  checked={this.state.showSecondTurnMoves} />
               </div>
             </div>
             <div className="chessboard">
