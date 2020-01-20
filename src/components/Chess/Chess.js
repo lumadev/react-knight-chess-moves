@@ -16,29 +16,49 @@ class Chess extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedCell: '',
+      selectedCell: null,
       loading: false,
       showSecondTurnMoves: true,
+      hasInvalidMove: false,
+      lastMove: null,
       allowedMoves: [],
       secondMoves: [],
       secondMovesApi: [],
-      errorGeneric: false
+      errorGeneric: false,
+      showError: false
     };
     this.cells = [];
+  }
+
+  isFirstMove() {
+    return this.state.selectedCell === null;
   }
 
   handleSelection(x, y) {
     const coordinate = x + String(y);
     if (this.isCellSelected(x, y)) {
-      this.clearSelections(x, y);
+      this.clearSelections();
       return;
     }
 
-    this.setState({ selectedCell: coordinate });
-    
     Axios.post(`http://localhost:3001/move/possible-moves`, { coordinate }).then((res) => {
       const moves = res.data.moves;
-      this.setState({ allowedMoves: moves });
+      const lastMove = this.state.lastMove;
+
+      if (moves.includes(lastMove) || this.isFirstMove()) {
+        this.setState({ 
+          selectedCell: coordinate,
+          allowedMoves: moves,
+          lastMove: coordinate,
+          hasInvalidMove: false,
+          showError: false
+        });
+      } else {
+        this.setState({ 
+          hasInvalidMove: true,
+          showError: true
+        });
+      }
       return moves;
 
     }).then((moves) => {
@@ -49,6 +69,10 @@ class Chess extends React.Component {
   }
 
   selectSecondTurnMoves(moves) {
+    if (this.state.hasInvalidMove) {
+      return;
+    }
+
     Axios.post(`http://localhost:3001/move/second-turn-moves`, { moves }).then((res) => {
       const moves = res.data.moves;
       this.setState({ 
@@ -61,11 +85,13 @@ class Chess extends React.Component {
     });
   }
 
-  clearSelections(x, y) {
+  clearSelections() {
     this.setState({ 
       selectedCell: null,
       allowedMoves: [],
-      secondMoves: []
+      secondMoves: [],
+      hasInvalidMove: false,
+      showError: false
     });
   }
 
@@ -76,11 +102,12 @@ class Chess extends React.Component {
     const isSelected = this.state.selectedCell === cellName;
     const isPossibleMove = this.state.allowedMoves.includes(cellName);
     const isSecondMove = this.state.secondMoves.includes(cellName);
+    const hasSelection = this.state.selectedCell !== null;
 
     if (isSelected || isPossibleMove) {
       return highlightedYellow;
     }
-    if (isSecondMove && this.state.showSecondTurnMoves) {
+    if (isSecondMove && this.state.showSecondTurnMoves && hasSelection) {
       return highlightedBlue;
     }
     return color;
@@ -93,10 +120,14 @@ class Chess extends React.Component {
     return isSelected;
   }
 
+  closeAlert() {
+    this.setState({ showError: false });
+  }
+
   toggleShowSecondMove() {
     const showState = this.state.showSecondTurnMoves;
     const hide = showState === true;
-
+    
     this.setState({ showSecondTurnMoves: !showState });
 
     if (hide) {
@@ -107,7 +138,8 @@ class Chess extends React.Component {
   }
 
   render() {
-    const { errorGeneric } = this.state;
+    const { errorGeneric, showError, hasInvalidMove } = this.state;
+    const invalidMove = 'Please choose a valid move.';
     const knightSymbol = '&#9816;';
     
     return (
@@ -115,8 +147,15 @@ class Chess extends React.Component {
         <Header />
         <div className="content">
           <div className="chessboard-container">
-            {errorGeneric === true ?
-              <Alert type="error" message={errorMessages.GENERIC_ERROR} /> : ''
+            {errorGeneric && showError ?
+              <Alert type="error" 
+                message={errorMessages.GENERIC_ERROR} 
+                closeAlert={this.closeAlert.bind(this)}/> : ''
+            }
+            {hasInvalidMove && showError ?
+              <Alert type="error" 
+                message={invalidMove} 
+                closeAlert={this.closeAlert.bind(this)}/> : ''
             }
             <div className="chess-title-container">
               <Link to="/home" className="item-link selected">
@@ -137,6 +176,9 @@ class Chess extends React.Component {
                   checked={this.state.showSecondTurnMoves} />
               </div>
             </div>
+            <a className="clear-board" onClick={this.clearSelections.bind(this)}>
+              Clear board
+            </a>
             <div className="chessboard">
               {/* line 8 */}
               <div id="A8" 
