@@ -1,5 +1,6 @@
 
 #Run the project
+- Run ``npm install``
 - Run ``npm start`` on console and project will load by default on http://localhost:3000/
 
 #Project Structure
