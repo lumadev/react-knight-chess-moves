@@ -43,3 +43,16 @@
 .img-possible-move {
   width: 33%;
 }
+
+@media only screen and (max-width: 375px) {
+  .todo-card-container {
+    display: block;
+
+    .todo-card {
+      width: 100%;
+    }
+    .img-possible-move {
+      display: none;
+    }
+  }
+}
