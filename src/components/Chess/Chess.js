@@ -160,7 +160,7 @@ class Chess extends React.Component {
             }
             <div className="chess-title-container">
               <Link to="/home" className="item-link selected">
-                <ButtonBack />
+                <ButtonBack ice={true} />
               </Link>
               
               <span></span>
