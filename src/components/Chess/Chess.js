@@ -8,6 +8,7 @@ import { BallBeat } from 'react-pure-loaders';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Chess.scss'
+import { API_URL } from '../../app.consts'
 
 import * as errorMessages from '../../error.consts';
 
@@ -41,7 +42,7 @@ class Chess extends React.Component {
       return;
     }
 
-    Axios.post(`http://localhost:3001/move/possible-moves`, { coordinate }).then((res) => {
+    Axios.post(`${API_URL}/move/possible-moves`, { coordinate }).then((res) => {
       const moves = res.data.moves;
       const lastMove = this.state.lastMove;
 
@@ -73,7 +74,7 @@ class Chess extends React.Component {
       return;
     }
 
-    Axios.post(`http://localhost:3001/move/second-turn-moves`, { moves }).then((res) => {
+    Axios.post(`${API_URL}/move/second-turn-moves`, { moves }).then((res) => {
       const moves = res.data.moves;
       this.setState({ 
         secondMoves: moves,
@@ -176,7 +177,7 @@ class Chess extends React.Component {
                   checked={this.state.showSecondTurnMoves} />
               </div>
             </div>
-            <a className="clear-board" onClick={this.clearSelections.bind(this)}>
+            <a href="#" className="clear-board" onClick={this.clearSelections.bind(this)}>
               Clear board
             </a>
             <div className="chessboard">
