@@ -27,19 +27,19 @@ class Step2Component extends React.Component {
           <div className="todo-card">
             <ul className="checklist">
               <li className="item-checklist">
-                <img className="check-button" src={blackCheck} />
+                <img className="check-button" src={blackCheck} alt="checkmark" />
                 <div className="text-instruction">Choose a square on the board</div>
               </li>
               <li className="item-checklist">
-                <img className="check-button" src={blackCheck} />
+                <img className="check-button" src={blackCheck} alt="checkmark" />
                 <div className="text-instruction">Tap or click to select</div>
               </li>
               <li className="item-checklist">
-                <img className="check-button" src={blackCheck} />
+                <img className="check-button" src={blackCheck} alt="checkmark"/>
                 <div className="text-instruction">Possible moves will be shown in yellow</div>
               </li>
               <li className="item-checklist">
-                <img className="check-button" src={blackCheck} />
+                <img className="check-button" src={blackCheck} alt="checkmark" />
                 <div className="text-instruction">Second moves will be shown in blue</div>
               </li>
             </ul>
