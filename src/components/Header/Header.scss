@@ -1,0 +1,36 @@
+@import '../../variables.scss';
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7vh;
+  border-bottom: 1px solid #e5e5e5;
+
+  .header-container {
+    width: 73%;
+  }
+}
+
+.links-container {
+  width: 16%;
+  display: flex;
+  color: #62646a;
+  font-weight: 600;
+
+  .item-link {
+    white-space:nowrap;
+    cursor: pointer;
+    margin-right: 16%;
+  }
+  .item-link:hover {
+    color: #1fd0b6;
+  }
+
+  .selected {
+    color: #1fd0b6;
+  }
+  .selected:hover {
+    color: lighten($greenContrastColor, 20%);
+  }
+}

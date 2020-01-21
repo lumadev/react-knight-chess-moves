@@ -1,0 +1,30 @@
+$message-types: (
+  error : #b94a48,
+  warn  : #c09853,
+  valid : #468847,
+  info  : #3a87ad
+) !default;
+
+$error-color: #b94a48;
+
+.error-message {
+  position: relative;
+  padding: 1em;
+  margin: .5em;
+  border-radius: .15em;
+  border: 1px solid;
+  color: $error-color;
+  background: lighten($error-color, 38%);
+  border-color: lighten($error-color, 20%);
+  margin-bottom: 5%;
+}
+
+.close-alert {
+  font-size: 22px;
+  position: absolute;
+  float: right;
+  right: 0;
+  top: 0;
+  margin: 1px 8px 0 0;
+  color: lighten($error-color, 20%);
+}

@@ -1,0 +1,15 @@
+@import '../../../variables.scss';
+
+.img-knight-container {
+  margin: 5% 5% 0 5%;
+  display: flex;
+  justify-content: center;
+
+  .img-knight {
+    width: 32%;
+    height: 50%;
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+  }
+}
