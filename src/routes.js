@@ -1,16 +1,14 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Wizard from "../src/components/Wizard/Wizard";
 import Chess from "../src/components/Chess/Chess";
 
-
-const Routes = () => (
+const AppRoutes = () => (
   <BrowserRouter>
-    <Switch>
-      <Route path="/game" component={Chess} />
-      <Route path="/" component={Wizard} />
-    </Switch>
+    <Routes>
+      <Route path="/game" element={<Chess />} />
+      <Route path="/" element={<Wizard />} />
+    </Routes>
   </BrowserRouter>
 );
 
-export default Routes;
+export default AppRoutes;
