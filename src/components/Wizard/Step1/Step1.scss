@@ -1,4 +1,4 @@
-@import '../../../variables.scss';
+@use '../../../variables' as vars;
 
 .img-knight-container {
   margin: 5% 5% 0 5%;
@@ -8,8 +8,10 @@
   .img-knight {
     width: 32%;
     height: 50%;
+    box-shadow: 0 0 3px #ccc;
+
+    // Para compatibilidade com navegadores antigos (opcional)
     -moz-box-shadow: 0 0 3px #ccc;
     -webkit-box-shadow: 0 0 3px #ccc;
-    box-shadow: 0 0 3px #ccc;
   }
 }

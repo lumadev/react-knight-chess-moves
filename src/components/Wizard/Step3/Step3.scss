@@ -1,4 +1,4 @@
-@import '../../../variables.scss';
+@use '../../../variables' as vars;
 
 .ready-container {
   display: flex;
@@ -18,14 +18,14 @@
     font: inherit;
     background-color: transparent;
     cursor: pointer;
-    border: 1px solid $greenContrastColor;
+    border: 1px solid vars.$greenContrastColor;
     border-radius: 5px;
-    color: $greenContrastColor;
+    color: vars.$greenContrastColor;
     width: 118px;
-  }
 
-  .button-start:hover {
-    background-color: $greenContrastColor;
-    color: white;
+    &:hover {
+      background-color: vars.$greenContrastColor;
+      color: white;
+    }
   }
 }

@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@use '../../variables' as vars;
 
 .header {
   display: flex;
@@ -19,18 +19,14 @@
   font-weight: 600;
 
   .item-link {
-    white-space:nowrap;
+    white-space: nowrap;
     cursor: pointer;
     margin-right: 16%;
-  }
-  .item-link:hover {
-    color: #1fd0b6;
-  }
+    transition: color 0.2s;
 
-  .selected {
-    color: #1fd0b6;
-  }
-  .selected:hover {
-    color: lighten($greenContrastColor, 20%);
+    &:hover,
+    &.selected {
+      color: vars.$greenContrastColor;
+    }
   }
 }

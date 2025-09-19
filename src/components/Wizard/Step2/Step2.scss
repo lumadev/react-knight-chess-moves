@@ -1,4 +1,4 @@
-@import '../../../variables.scss';
+@use '../../../variables' as vars;
 
 .second-step-container {
   display: flex;
@@ -13,14 +13,14 @@
   .todo-card {
     margin: 0 4% 0 0;
     width: 61%;
-    height: 24h;
+    height: 24h; // verificar se é "24h" mesmo ou deveria ser "24vh" ou "24px"
     background-color: #f5f5f5;
     border-radius: 12px;
   }
 }
 
 .checklist {
-  padding: 0 0 0 5%;
+  padding-left: 5%;
 }
 
 .item-checklist {
@@ -33,7 +33,7 @@
     width: 30px;
     height: 30px;
   }
-  
+
   .text-instruction {
     margin-left: 3%;
     color: #535556;
@@ -51,6 +51,7 @@
     .todo-card {
       width: 100%;
     }
+
     .img-possible-move {
       display: none;
     }

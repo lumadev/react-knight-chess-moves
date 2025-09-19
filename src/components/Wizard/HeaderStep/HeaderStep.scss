@@ -1,4 +1,4 @@
-@import '../../../variables.scss';
+@use '../../../variables' as vars;
 
 .instructions-first-step {
   color: #393b3c;
@@ -12,5 +12,5 @@
 .green-container {
   margin-top: 4%;
   height: 4vh;
-  background-color: lighten($greenContrastColor, 10%);
+  background-color: vars.$greenContrastColor;
 }

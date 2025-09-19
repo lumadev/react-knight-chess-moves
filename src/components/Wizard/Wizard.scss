@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@use '../../variables' as vars;
 
 $bloomin-dark-green-color: #47b8b3;
 
@@ -16,7 +16,7 @@ $line-vertical-offset: -1px;
 
 .chessgame-title {
   font-weight: bold;
-  font-size: 26px
+  font-size: 26px;
 }
 
 .content {
@@ -31,11 +31,11 @@ $line-vertical-offset: -1px;
     margin-top: 4%;
     width: 37%;
     height: 70%;
-    background-color: white;
+    background-color: $wizard-bg-color;
   }
 }
 
-// steps
+// Steps
 .steps ul li {
   width: 20.16%;
   margin-right: 10px;
@@ -70,20 +70,18 @@ $line-vertical-offset: -1px;
         border-radius: 50%;
 
         z-index: 15;
-
         transition: $step-transition;
       }
 
       .step-name {
         color: $text-muted-color;
-
         transition: $step-transition;
       }
 
       &.completed {
         .step-number {
           color: $text-completed-step-color;
-          background-color: $greenContrastColor;
+          background-color: vars.$greenContrastColor;
         }
 
         .step-name {
@@ -103,9 +101,7 @@ $line-vertical-offset: -1px;
     );
     z-index: 5;
   }
-}
 
-.wizard-steps {
   // Hide line before first step
   .step:first-of-type {
     .step-name:after {
@@ -116,9 +112,7 @@ $line-vertical-offset: -1px;
       position: relative;
       top: calc(
         -1em - #{$step-number-border-thickness} - #{$step-number-dimension} +
-        (
-        #{$wizard-line-height} * 2
-        ) + #{$line-vertical-offset}
+        (#{$wizard-line-height} * 2) + #{$line-vertical-offset}
       );
       background-color: $wizard-bg-color;
       z-index: 10;
@@ -135,9 +129,7 @@ $line-vertical-offset: -1px;
       position: relative;
       top: calc(
         -1em - #{$step-number-border-thickness} - #{$step-number-dimension} +
-        (
-        #{$wizard-line-height} * 2
-        ) + #{$line-vertical-offset}
+        (#{$wizard-line-height} * 2) + #{$line-vertical-offset}
       );
       left: 50%;
       background-color: $wizard-bg-color;
