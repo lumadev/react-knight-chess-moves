@@ -4,7 +4,7 @@ import Alert from "../../shared/Alert/Alert";
 import CheckboxSquare from "../../shared/CheckboxSquare/CheckboxSquare";
 import ButtonBack from "../Wizard/ButtonBack/ButtonBack";
 import ReactHtmlParser from "react-html-parser";
-import { BallBeat } from "react-pure-loaders";
+import { BeatLoader } from 'react-spinners';
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import "./Chess.scss";
@@ -142,7 +142,7 @@ function Chess() {
             </Link>
             <span></span>
             <span className="chess-title">Chessboard</span>
-            {loading && <BallBeat color={"#123abc"} loading={true} />}
+            {loading && <BeatLoader color={"#123abc"} loading={true} />}
             <div className="checkbox-container">
               <span className="span-second-move">Show Second Moves</span>
               <CheckboxSquare
